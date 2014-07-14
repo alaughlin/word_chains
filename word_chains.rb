@@ -51,7 +51,7 @@ class WordChainer
     current_target = target
 
     until current_target.nil?
-      path << current_target
+      path.unshift(current_target)
       current_target = @all_seen_words[current_target]
     end
 
