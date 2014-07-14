@@ -40,10 +40,6 @@ class WordChainer
     end
 
     @current_words = new_current_words
-
-    new_current_words.each do |current_word|
-      puts "#{current_word} came from #{@all_seen_words[current_word]}"
-    end
   end
 
   def build_path(target)
@@ -55,10 +51,11 @@ class WordChainer
       current_target = @all_seen_words[current_target]
     end
 
-    p path
+    path
   end
 
   def run(source, target)
+    puts "Finding the path from #{source} to #{target}..."
     @current_words = [source]
     @all_seen_words = { source => nil }
 
@@ -66,9 +63,15 @@ class WordChainer
       explore_current_words
     end
 
-    build_path(target)
+    p build_path(target)
   end
 end
 
 wc = WordChainer.new("dictionary.txt")
-wc.run("duck", "ruby")
+
+print "Enter the source word: "
+source = gets.chomp
+print "Enter the target word: "
+target = gets.chomp
+
+wc.run(source, target)
